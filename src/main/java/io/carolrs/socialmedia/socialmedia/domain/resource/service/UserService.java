@@ -1,5 +1,6 @@
 package io.carolrs.socialmedia.socialmedia.domain.resource.service;
 
+import io.carolrs.socialmedia.dto.UserDTO;
 import io.carolrs.socialmedia.socialmedia.domain.User;
 import io.carolrs.socialmedia.socialmedia.domain.resource.repository.UserRepository;
 import io.carolrs.socialmedia.socialmedia.domain.resource.service.exceptions.ObjectNotFoundException;
@@ -21,5 +22,11 @@ public class UserService {
 
         Optional<User> obj = repo.findById(id);
         return obj.orElseThrow(()-> new ObjectNotFoundException("Object not found"));
+    }
+    public User insert (User obj){
+        return repo.insert(obj);
+    }
+    public User fromDTO(UserDTO objDTO){
+        return new User(objDTO.getId(),objDTO.getName(),objDTO.getEmail());
     }
 }
