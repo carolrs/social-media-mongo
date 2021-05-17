@@ -9,6 +9,9 @@ import io.carolrs.socialmedia.socialmedia.domain.resource.service.exceptions.Obj
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +27,9 @@ public class PostService {
     }
     public List<Post> findByTitle(String text){
         return repo.searchTitle(text);
+    }
+    public List<Post> fullSearch(String text, LocalDateTime minDate, LocalDateTime maxDate) {
+        return repo.fullSearch(text, minDate, maxDate);
     }
 
 }

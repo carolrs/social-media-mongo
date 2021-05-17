@@ -11,6 +11,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 @Configuration
@@ -32,8 +33,8 @@ public class Instantiation implements CommandLineRunner {
         User bob = new User(null, "Bob Grey", "bob@gmail.com");
         userRepository.saveAll(Arrays.asList(maria,alex,bob));
 
-        Post post1 = new Post(null, LocalDate.now(),"Partiu viagem", "Vou viajar para SP.",new AuthorDTO(maria));
-        Post post2 = new Post(null, LocalDate.now(),"Bom dia", "Acordei feliz.",new AuthorDTO(maria));
+        Post post1 = new Post(null, LocalDateTime.now(),"Partiu viagem", "Vou viajar para SP.",new AuthorDTO(maria));
+        Post post2 = new Post(null, LocalDateTime.now(),"Bom dia", "Acordei feliz.",new AuthorDTO(maria));
 
         CommentDTO c1 = new CommentDTO("Boa viagem!", LocalDate.now(),new AuthorDTO(alex));
         CommentDTO c2 = new CommentDTO("Aproveite!", LocalDate.now(),new AuthorDTO(bob));
