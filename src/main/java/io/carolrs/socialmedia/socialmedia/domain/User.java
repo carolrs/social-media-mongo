@@ -6,13 +6,15 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
 @EqualsAndHashCode (of = "id")
 @Document
@@ -23,8 +25,21 @@ public class User implements Serializable {
     private String name;
     private String email;
 
-    public User(String name, String email) {
+    @DBRef(lazy = true)
+    //os posts so serao acecssados se voce explicitar.Evita que eles venham jnt com o User.
+    private List<Post> posts= new ArrayList<>();
+
+
+    public User(String id,String name, String email) {
+        super();
+        this.id = id;
         this.name = name;
         this.email = email;
+    }
+    public List <Post> getPosts(){
+        return posts;
+    }
+    public void  setPosts(List<Post> posts){
+        this.posts=posts;
     }
 }
