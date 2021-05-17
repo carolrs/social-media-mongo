@@ -1,5 +1,6 @@
 package io.carolrs.socialmedia.socialmedia.domain;
 
+import io.carolrs.socialmedia.dto.AuthorDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -22,6 +23,6 @@ public class Post implements Serializable {
     private LocalDate date;
     private String title;
     private String body;
-    private User author;
+    private AuthorDTO author;
 
 }
