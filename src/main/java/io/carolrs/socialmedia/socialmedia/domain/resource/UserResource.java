@@ -1,6 +1,7 @@
 package io.carolrs.socialmedia.socialmedia.domain.resource;
 
 import io.carolrs.socialmedia.dto.UserDTO;
+import io.carolrs.socialmedia.socialmedia.domain.Post;
 import io.carolrs.socialmedia.socialmedia.domain.User;
 import io.carolrs.socialmedia.socialmedia.domain.resource.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,11 @@ public class UserResource {
         obj.setId(id); //garantir que o obj tera o id da requisicao
         obj = service.update(obj);
         return ResponseEntity.noContent().build();
-
     }
+    @GetMapping(value = "/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+        User obj = service.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
+    }
+
 }
