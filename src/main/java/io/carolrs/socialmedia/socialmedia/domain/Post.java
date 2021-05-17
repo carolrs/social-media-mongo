@@ -1,6 +1,7 @@
 package io.carolrs.socialmedia.socialmedia.domain;
 
 import io.carolrs.socialmedia.dto.AuthorDTO;
+import io.carolrs.socialmedia.dto.CommentDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -10,9 +11,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
 @EqualsAndHashCode (of = "id")
 @Document //indica que é um doc no mongo
@@ -24,5 +26,15 @@ public class Post implements Serializable {
     private String title;
     private String body;
     private AuthorDTO author;
+
+    private List <CommentDTO> comments = new ArrayList<>();
+
+    public Post(String id, LocalDate date, String title, String body, AuthorDTO author) {
+        this.id = id;
+        this.date = date;
+        this.title = title;
+        this.body = body;
+        this.author = author;
+    }
 
 }

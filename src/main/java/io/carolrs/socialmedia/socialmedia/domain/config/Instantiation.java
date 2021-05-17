@@ -1,6 +1,7 @@
 package io.carolrs.socialmedia.socialmedia.domain.config;
 
 import io.carolrs.socialmedia.dto.AuthorDTO;
+import io.carolrs.socialmedia.dto.CommentDTO;
 import io.carolrs.socialmedia.socialmedia.domain.Post;
 import io.carolrs.socialmedia.socialmedia.domain.User;
 import io.carolrs.socialmedia.socialmedia.domain.resource.repository.PostRepository;
@@ -26,13 +27,21 @@ public class Instantiation implements CommandLineRunner {
         userRepository.deleteAll();
         postRepository.deleteAll();
 
-        User maria = new User(null, "Maria Brown", "maria@gmail.com");
+        User maria = new User(null, "Mari a Brown", "maria@gmail.com");
         User alex = new User(null, "Alex Green", "alex@gmail.com");
         User bob = new User(null, "Bob Grey", "bob@gmail.com");
         userRepository.saveAll(Arrays.asList(maria,alex,bob));
 
         Post post1 = new Post(null, LocalDate.now(),"Partiu viagem", "Vou viajar para SP.",new AuthorDTO(maria));
         Post post2 = new Post(null, LocalDate.now(),"Bom dia", "Acordei feliz.",new AuthorDTO(maria));
+
+        CommentDTO c1 = new CommentDTO("Boa viagem!", LocalDate.now(),new AuthorDTO(alex));
+        CommentDTO c2 = new CommentDTO("Aproveite!", LocalDate.now(),new AuthorDTO(bob));
+        CommentDTO c3 = new CommentDTO("Tenha um otimo dia!", LocalDate.now(),new AuthorDTO(alex));
+
+        post1.getComments().addAll(Arrays.asList(c1,c2));
+        post2.getComments().addAll(Arrays.asList(c3));
+
         postRepository.saveAll(Arrays.asList(post1,post2));
 
         maria.getPosts().addAll(Arrays.asList(post1,post2));
